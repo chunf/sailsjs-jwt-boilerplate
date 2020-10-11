@@ -1,12 +1,12 @@
 var passport = require('passport');
 
 module.exports = function (req, res, next) {
-  passport.authenticate('jwt', (error, user, info) => {
+  passport.authenticate('jwt', (error, user) => {
     if (error) {
       return res.serverError(error);
     }
     if (!user) {
-      return res.unauthorized(null, info && info.code, info && info.message);
+      return res.forbidden();
     }
     req.user = user;
 
